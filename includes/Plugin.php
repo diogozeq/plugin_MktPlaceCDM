@@ -61,6 +61,11 @@ final class Plugin {
 		add_action( 'woocommerce_init', array( $this, 'init_features' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_filter( 'cdm_vendor_cep_zones', array( \CDM\VendorCepStorage::class, 'filter_vendor_cep_zones' ), 10, 2 );
+
+		// Inicializa admin separadamente (woocommerce_init não dispara no admin)
+		if ( is_admin() ) {
+			add_action( 'admin_init', array( $this, 'init_admin_features' ) );
+		}
 	}
 
 	/**
@@ -219,6 +224,15 @@ final class Plugin {
 				}
 			}
 		);
+	}
+
+	/**
+	 * Inicializa recursos do admin (chamado via admin_init hook).
+	 *
+	 * @return void
+	 */
+	public function init_admin_features(): void {
+		$this->init_admin();
 	}
 
 	/**

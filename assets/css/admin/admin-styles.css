@@ -35,4 +35,73 @@
 	padding-bottom: 10px;
 }
 
-/* TODO: Adicionar mais estilos na FASE 6 */
+.cdm-admin-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 12px;
+}
+
+.cdm-admin-card {
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #2271b1;
+	padding: 12px;
+}
+
+.cdm-admin-card-label {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	color: #646970;
+}
+
+.cdm-admin-card-value {
+	margin-top: 8px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.cdm-vendor-table td {
+	vertical-align: top;
+}
+
+.cdm-cep-textarea {
+	width: 100%;
+	min-height: 70px;
+	font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+.cdm-pagination {
+	margin-top: 16px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.cdm-pagination-info {
+	color: #50575e;
+}
+
+.cdm-log-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 12px;
+}
+
+.cdm-log-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	padding: 12px;
+}
+
+.cdm-log-box {
+	background: #1d2327;
+	color: #f0f0f1;
+	padding: 10px;
+	border-radius: 2px;
+	font-size: 12px;
+	max-height: 240px;
+	overflow: auto;
+	white-space: pre-wrap;
+}

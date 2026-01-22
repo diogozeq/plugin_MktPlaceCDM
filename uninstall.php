@@ -48,6 +48,17 @@ $wpdb->query(
 );
 
 /**
+ * Remove CEPs manuais dos vendedores
+ */
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+$wpdb->query(
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->usermeta} WHERE meta_key = %s",
+		'cdm_vendor_cep_zones'
+	)
+);
+
+/**
  * Limpa cache de objeto (se disponível)
  */
 if ( function_exists( 'wp_cache_flush' ) ) {

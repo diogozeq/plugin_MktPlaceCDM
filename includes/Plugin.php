@@ -60,6 +60,7 @@ final class Plugin {
 	private function init_hooks(): void {
 		add_action( 'woocommerce_init', array( $this, 'init_features' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+		add_filter( 'cdm_vendor_cep_zones', array( \CDM\VendorCepStorage::class, 'filter_vendor_cep_zones' ), 10, 2 );
 	}
 
 	/**
@@ -73,6 +74,10 @@ final class Plugin {
 
 		// Inicializar componentes principais com injeção de dependências
 		$this->init_core_components();
+
+		if ( is_admin() ) {
+			$this->init_admin();
+		}
 
 		do_action( 'cdm_after_init' );
 	}
@@ -217,9 +222,19 @@ final class Plugin {
 	}
 
 	/**
+	 * Inicializa recursos do admin.
+	 *
+	 * @return void
+	 */
+	private function init_admin(): void {
+		$admin_page = new \CDM\Admin\AdminPage( $this->version );
+		$admin_page->init();
+	}
+
+	/**
 	 * Carrega assets do admin
 	 *
-	 * @param string $hook Hook da página atual.
+	 * @param string $hook Hook da pagina atual.
 	 * @return void
 	 */
 	public function enqueue_admin_assets( string $hook ): void {

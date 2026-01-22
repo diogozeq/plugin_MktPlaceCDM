@@ -35,9 +35,11 @@ define( 'CDM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CDM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CDM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-// Autoloader Composer
+// Autoloader Composer (preferencial) ou autoloader manual
 if ( file_exists( CDM_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 	require_once CDM_PLUGIN_DIR . 'vendor/autoload.php';
+} elseif ( file_exists( CDM_PLUGIN_DIR . 'includes/autoload.php' ) ) {
+	require_once CDM_PLUGIN_DIR . 'includes/autoload.php';
 }
 
 /**

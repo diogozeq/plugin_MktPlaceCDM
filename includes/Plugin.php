@@ -37,6 +37,11 @@ final class Plugin {
 	private function __construct() {
 		$this->version = CDM_VERSION;
 		$this->init_hooks();
+
+		// Inicializa admin imediatamente (antes do hook admin_menu)
+		if ( is_admin() ) {
+			$this->init_admin();
+		}
 	}
 
 	/**
@@ -61,11 +66,6 @@ final class Plugin {
 		add_action( 'woocommerce_init', array( $this, 'init_features' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_filter( 'cdm_vendor_cep_zones', array( \CDM\VendorCepStorage::class, 'filter_vendor_cep_zones' ), 10, 2 );
-
-		// Inicializa admin separadamente (woocommerce_init não dispara no admin)
-		if ( is_admin() ) {
-			add_action( 'admin_init', array( $this, 'init_admin_features' ) );
-		}
 	}
 
 	/**
@@ -79,10 +79,6 @@ final class Plugin {
 
 		// Inicializar componentes principais com injeção de dependências
 		$this->init_core_components();
-
-		if ( is_admin() ) {
-			$this->init_admin();
-		}
 
 		do_action( 'cdm_after_init' );
 	}
@@ -224,15 +220,6 @@ final class Plugin {
 				}
 			}
 		);
-	}
-
-	/**
-	 * Inicializa recursos do admin (chamado via admin_init hook).
-	 *
-	 * @return void
-	 */
-	public function init_admin_features(): void {
-		$this->init_admin();
 	}
 
 	/**

@@ -10,7 +10,7 @@ declare(strict_types=1);
 ?>
 <div class="wrap cdm-admin-wrapper">
 	<div class="cdm-admin-header">
-		<h1><?php echo esc_html__( 'Catalog Router', 'cdm-catalog-router' ); ?></h1>
+		<h1><?php echo esc_html__( 'MktPlace CDM', 'cdm-catalog-router' ); ?></h1>
 		<p><?php echo esc_html__( 'Visao rapida do funcionamento, CEPs dos sellers e logs recentes.', 'cdm-catalog-router' ); ?></p>
 	</div>
 

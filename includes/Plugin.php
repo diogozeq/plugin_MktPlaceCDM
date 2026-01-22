@@ -239,7 +239,7 @@ final class Plugin {
 	 */
 	public function enqueue_admin_assets( string $hook ): void {
 		// Apenas carregar na página do plugin
-		if ( 'woocommerce_page_cdm-catalog-router' !== $hook ) {
+		if ( ! in_array( $hook, array( 'woocommerce_page_cdm-catalog-router', 'toplevel_page_cdm-catalog-router' ), true ) ) {
 			return;
 		}
 

@@ -53,13 +53,14 @@ final class AdminPage {
 	 * @return void
 	 */
 	public function register_menu(): void {
-		add_submenu_page(
-			'woocommerce',
-			esc_html__( 'Catalog Router', 'cdm-catalog-router' ),
-			esc_html__( 'Catalog Router', 'cdm-catalog-router' ),
+		add_menu_page(
+			esc_html__( 'MktPlace CDM', 'cdm-catalog-router' ),
+			esc_html__( 'MktPlace CDM', 'cdm-catalog-router' ),
 			'manage_woocommerce',
 			self::MENU_SLUG,
-			array( $this, 'render_page' )
+			array( $this, 'render_page' ),
+			'dashicons-networking',
+			60
 		);
 	}
 

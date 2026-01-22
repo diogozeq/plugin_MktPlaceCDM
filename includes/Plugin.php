@@ -37,11 +37,6 @@ final class Plugin {
 	private function __construct() {
 		$this->version = CDM_VERSION;
 		$this->init_hooks();
-
-		// Inicializa admin imediatamente (antes do hook admin_menu)
-		if ( is_admin() ) {
-			$this->init_admin();
-		}
 	}
 
 	/**
@@ -220,16 +215,6 @@ final class Plugin {
 				}
 			}
 		);
-	}
-
-	/**
-	 * Inicializa recursos do admin.
-	 *
-	 * @return void
-	 */
-	private function init_admin(): void {
-		$admin_page = new \CDM\Admin\AdminPage( $this->version );
-		$admin_page->init();
 	}
 
 	/**

@@ -1,9 +1,11 @@
 <?php
 /**
- * Plugin Name: CDM Catalog Router
+* Plugin Name: CDM Catalog Router
  * Plugin URI: https://github.com/diogozeq/plugin_MktPlaceCDM
  * Description: Plugin WordPress/WooCommerce para roteamento inteligente de pedidos de marketplace para clones de vendedores (Dokan SPMV Engine)
  * Version: 1.0.0
+ * GitHub Plugin URI: https://github.com/diogozeq/plugin_MktPlaceCDM
+ * Primary Branch: main
  * Author: CDM Team
  * Author URI: https://teste.casadomedico.com.br/
  * License: GPL-2.0+

@@ -1,0 +1,45 @@
+{
+    "name": "cdm/catalog-router",
+    "description": "Plugin WordPress/WooCommerce para roteamento inteligente de pedidos de marketplace",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "CDM Team",
+            "email": "dev@cdm.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "wp-phpunit/wp-phpunit": "^6.0",
+        "squizlabs/php_codesniffer": "^3.7",
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "CDM\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CDM\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=WordPress includes/",
+        "phpcbf": "phpcbf --standard=WordPress includes/",
+        "phpstan": "phpstan analyse includes/ --level=5",
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-text"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="CDM Catalog Router">
+	<description>WordPress Coding Standards for CDM Catalog Router</description>
+
+	<!-- What to scan -->
+	<file>includes/</file>
+
+	<!-- Exclude patterns -->
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+
+	<!-- How to scan -->
+	<arg value="sp"/> <!-- Show sniff and progress -->
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="8"/>
+
+	<!-- Rules: WordPress Coding Standards -->
+	<config name="minimum_supported_wp_version" value="6.0"/>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+
+	<!-- Check for PHP cross-version compatibility -->
+	<config name="testVersion" value="8.2-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- WordPress Specific -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="cdm-catalog-router"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Allow short array syntax -->
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
+		<severity>0</severity>
+	</rule>
+</ruleset>

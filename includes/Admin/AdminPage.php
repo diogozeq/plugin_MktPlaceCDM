@@ -53,10 +53,16 @@ final class AdminPage {
 	 * @return void
 	 */
 	public function register_menu(): void {
+		// Usa manage_options como fallback se manage_woocommerce não existir
+		$capability = 'manage_options';
+		if ( class_exists( 'WooCommerce' ) ) {
+			$capability = 'manage_woocommerce';
+		}
+
 		add_menu_page(
 			esc_html__( 'MktPlace CDM', 'cdm-catalog-router' ),
 			esc_html__( 'MktPlace CDM', 'cdm-catalog-router' ),
-			'manage_woocommerce',
+			$capability,
 			self::MENU_SLUG,
 			array( $this, 'render_page' ),
 			'dashicons-networking',
@@ -188,7 +194,8 @@ final class AdminPage {
 	 * @return void
 	 */
 	public function handle_vendor_ceps_save(): void {
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		$capability = class_exists( 'WooCommerce' ) ? 'manage_woocommerce' : 'manage_options';
+		if ( ! current_user_can( $capability ) ) {
 			wp_die( esc_html__( 'Sem permissao para salvar.', 'cdm-catalog-router' ) );
 		}
 
@@ -239,7 +246,8 @@ final class AdminPage {
 	 * @return void
 	 */
 	public function render_page(): void {
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		$capability = class_exists( 'WooCommerce' ) ? 'manage_woocommerce' : 'manage_options';
+		if ( ! current_user_can( $capability ) ) {
 			return;
 		}
 

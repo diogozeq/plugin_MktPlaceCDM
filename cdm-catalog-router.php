@@ -43,14 +43,27 @@ if ( file_exists( CDM_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 }
 
 /**
+ * Instância singleton do AdminPage para o admin
+ *
+ * @return \CDM\Admin\AdminPage|null
+ */
+function cdm_get_admin_page() {
+	static $admin_page = null;
+	if ( null === $admin_page && class_exists( 'CDM\Admin\AdminPage' ) ) {
+		$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+	}
+	return $admin_page;
+}
+
+/**
  * Registra o menu do admin diretamente (independente de dependências)
  * Isso garante que o menu sempre aparece no WordPress admin
  */
 add_action(
 	'admin_menu',
 	function () {
-		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
-			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+		$admin_page = cdm_get_admin_page();
+		if ( $admin_page ) {
 			$admin_page->register_menu();
 		}
 	}
@@ -62,8 +75,8 @@ add_action(
 add_action(
 	'admin_init',
 	function () {
-		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
-			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+		$admin_page = cdm_get_admin_page();
+		if ( $admin_page ) {
 			$admin_page->register_settings();
 		}
 	}
@@ -75,8 +88,8 @@ add_action(
 add_action(
 	'admin_post_cdm_save_vendor_ceps',
 	function () {
-		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
-			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+		$admin_page = cdm_get_admin_page();
+		if ( $admin_page ) {
 			$admin_page->handle_vendor_ceps_save();
 		}
 	}
@@ -161,7 +174,7 @@ register_deactivation_hook( __FILE__, 'cdm_deactivate_plugin' );
 add_action(
 	'before_woocommerce_init',
 	function () {
-		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		if ( class_exists( 'Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
 				'custom_order_tables',
 				__FILE__,

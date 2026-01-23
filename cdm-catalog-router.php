@@ -43,6 +43,46 @@ if ( file_exists( CDM_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 }
 
 /**
+ * Registra o menu do admin diretamente (independente de dependências)
+ * Isso garante que o menu sempre aparece no WordPress admin
+ */
+add_action(
+	'admin_menu',
+	function () {
+		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
+			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+			$admin_page->register_menu();
+		}
+	}
+);
+
+/**
+ * Registra settings do admin
+ */
+add_action(
+	'admin_init',
+	function () {
+		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
+			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+			$admin_page->register_settings();
+		}
+	}
+);
+
+/**
+ * Handler para salvar CEPs de vendedores
+ */
+add_action(
+	'admin_post_cdm_save_vendor_ceps',
+	function () {
+		if ( class_exists( 'CDM\Admin\AdminPage' ) ) {
+			$admin_page = new \CDM\Admin\AdminPage( CDM_VERSION );
+			$admin_page->handle_vendor_ceps_save();
+		}
+	}
+);
+
+/**
  * Verifica dependências do plugin
  *
  * @param bool $fail_hard Se true, desativa e interrompe a execução (ativação).
